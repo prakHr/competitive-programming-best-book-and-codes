@@ -22,9 +22,15 @@ typedef vector<string> vs;
 typedef vector<pii> vii;
 typedef vector<vi> vvi;
 typedef map<int,int> mpii;
+typedef set<int> seti;
+
+
 
 void solve(){
+  
 }
+
+
 signed main() 
 {
   int t=1;
@@ -65,6 +71,1139 @@ Start using personal laptop with different browsers while using different codefo
 /* PASTE TILL HERE ONLY */
 /* PASTE TILL HERE ONLY */
 /*                      */
+
+
+
+/* TIPS */
+// 1. while clearing a global map,set,vector need to clear it using .clear() or memset
+// 2. consider 1-based indexing wherever deemed necessary
+
+/*function to convert chess string into chess board coordinate*/
+// pair<int, int> chessToCoords(const string& square) {
+//     if (square.length() != 2) {
+//         throw invalid_argument("Invalid square format. Must be like e4, a1, etc.");
+//     }
+
+//     char file = tolower(square[0]); // 'a' to 'h'
+//     char rank = square[1];          // '1' to '8'
+
+//     // Check valid range
+//     if (file < 'a' || file > 'h' || rank < '1' || rank > '8') {
+//         throw invalid_argument("Invalid square: must be between a1 and h8.");
+//     }
+
+//     int x = file - 'a' + 1;  // 'a' → 1, 'b' → 2, ..., 'h' → 8
+//     int y = rank - '0';      // '1' → 1, ..., '8' → 8
+
+//     return {x, y};
+// }
+
+
+// clockwise or counterclockwise min distance
+// void solve(){
+//   string a;
+//   cin>>a;
+//   int n = SZ(a);
+//   int cnt = 0;
+//   char cur =  'a';
+//   REP(i,n){
+//     int b = abs(a[i]-cur);
+//     int c = 26-b;
+//     cnt+=min(b,c);
+//     cur=a[i];
+//   }
+//   cout<<cnt<<endl;
+// }
+
+// getline to spit with delimiter
+// void solve(){
+//   int n;
+//   cin>>n;
+//   cin.ignore(); 
+//   string word;
+//   getline(cin,word);
+//   vs s = split_sentence(word);
+// }
+
+/*function to split sentence into words*/
+// vector<string> split_sentence(string sen) {
+//   vector<string> words;
+//   string word = "";
+//   for (char c : sen) {
+//       if (c == ' ') {
+//           words.push_back(word);
+//           word = "";
+//       }
+//       else {
+//           word += c;
+//       }
+//   }
+//   if (!word.empty()) {
+//       words.push_back(word);
+//   }
+//     return words;
+// }
+
+// taking substring of remaining fixed length from begin and end
+// void solve(){
+
+//   int n;cin>>n;
+//   string s;cin>>s;
+//   REP(i,4+1){
+//     if(s.substr(0,i) + s.substr(n-(4-i),4-i)=="2020"){
+//       cout<<"YES\n";return;
+//     }
+//   }
+//   cout<<"NO\n";
+
+/*bfs using set over a string*/
+// void solve(){
+//   int n,k;string s;
+//   cin>>n>>k>>s;
+//   int cnt = count(ALL(s),'1');
+//   int cur=0;
+//   while(cur<k and cnt!=n){
+//     cur++;
+//     seti st;
+//     REP(i,n){
+//       if(s[i]=='1')continue;
+//       if(i==0){
+//         if(s[i+1]=='1'){st.insert(i);continue;}
+//       }
+//       if(i==n-1){
+//         if(s[i-1]=='1'){st.insert(i);continue;}
+//       }
+//       if(s[i-1]==s[i+1] and s[i-1]=='1')continue;
+//       if(s[i-1]=='1')st.insert(i);
+//       if(s[i+1]=='1')st.insert(i);
+        
+//     }
+//     if(st.empty())break;
+//     cnt+=SZ(st);
+//     for(auto x:st)s[x] = '1';
+    
+//   }
+//   cout<<s<<endl;
+  
+// }
+
+/*function to find intersection of 2 sets*/
+// void solve(){
+// int n;
+// cin>>n;
+// seti ans;
+// REP(i,n){
+//     int r;
+//     cin>>r;
+//     seti st;
+//     REP(j,r){
+//       int x;
+//       cin>>x;
+//       st.insert(x);
+//     }
+//     if(i==0){
+//     ans = st; 
+//     }else{
+//       seti res;
+//       set_intersection(ans.begin(), ans.end(), st.begin(),
+//                     st.end(),
+//                     inserter(res, res.begin()));
+//       ans = res;
+//     }
+// }
+// for(auto ele:ans)cout<<ele<<" ";
+// }
+
+/*Double ended matching strings*/
+// void solve(){
+// string a,b;
+// cin>>a>>b;
+// int n =SZ(a),m = SZ(b);
+// int ans = 0;
+//   for(int len=1;len<=min(n,m);len++){
+//     for(int i=0;i+len<=n;i++){
+//       for(int j=0;j+len<=m;j++){
+//         if(a.substr(i,len)==b.substr(j,len))ans=max(ans,len);
+//       }
+//     }
+//   }
+//   cout<<(n-ans+m-ans)<<endl;
+// }
+/* firstever change problem(1100 is of length 4 so we have to check for prev 4 strings that are 
+made of 1100 or not)*/
+
+// string s;
+// int n;
+
+// bool check_1100(int i) {
+// 	if (i < 0) return false;
+// 	if (i+3 >= n) return false;
+// 	if (s[i] == '1' && s[i + 1] == '1' && s[i + 2] == '0' && s[i + 3] == '0') return true;
+// 	return false;
+// }
+// void solve(){
+  
+//   cin>>s;
+//   n = SZ(s);
+// 	int count = 0;
+// 	REP(i,n)
+// 		if (check_1100(i)) count++;
+	
+// 	int q; cin>>q;
+// 	while (q--) {
+// 		int i, v; cin>>i>>v; i--;
+//     bool initial = check_1100(i - 3) || check_1100(i - 2) || check_1100(i - 1) || check_1100(i);
+//     s[i] = '0' + v;
+//     bool final = check_1100(i - 3) || check_1100(i - 2) || check_1100(i - 1) || check_1100(i);
+//     int change = final - initial;
+//     count += change;
+// 		cout<<(count ? "YES\n" : "NO\n");
+// 	}
+  
+// }
+
+
+/*distinct non-empty substrings by remove the first or second char of string*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   string s;
+//   cin>>s;
+//   vi ans(n,0);
+//   vi o(26,n);
+//   ans[n-1] = 1;
+//   o[s[n-1]-'a'] = n-1;
+//   for(int i=n-2;i>=0;i--){
+//     ans[i] = ans[i+1] + (o[s[i]-'a']-i);
+//     o[s[i]-'a'] = i;
+//   }
+//   cout<<ans[0]<<endl;
+// }
+
+
+/*loops using TC of O(log(a*logb))*/
+// void solve(){
+//   int a,b,x;
+//   cin>>a>>b>>x;
+//   seti st;
+//   for(int s=1;x%s==0;s*=a){
+//     for(int t=1;x%(s*t)==0;t*=b){
+//       st.insert(x/s/t);
+//     }
+//   }
+//   cout<<SZ(st)<<endl;
+// }
+
+
+/* firstever recursion problem with MAX declaration*/
+// vector<int> binary_decimals;
+
+// bool ok(int n){
+//   if(n==1)return 1;
+//   bool ans = 0;
+//   for(int i:binary_decimals){
+//     if(n%i == 0)ans = ans or ok(n/i);
+//   }
+//   return ans;
+// }
+// void solve(){
+//   const int MAX = 100'007;
+
+//   for (int i = 2; i < MAX; i++) {
+//   		int curr = i;
+//   		bool bad = false;
+//   		while (curr) {
+//   			if (curr % 10 > 1) {bad = true; break;}
+//   			curr /= 10;
+//   		}
+//   		if (!bad) {binary_decimals.push_back(i);}
+  		
+//   	}
+//   int t;
+//   cin>>t;
+//   while(t--){
+//     int n;
+//     cin>>n;
+//     if(ok(n))cout<<"YES\n";
+//     else cout<<"NO\n";
+//   }
+// }
+/* LCM of 2 strings*/
+// string form(string s,int k){
+//   string res;
+//   while(k--)res+=s;
+//   return res;
+// }
+// void solve(){
+//   string s,t;
+//   cin>>s>>t;
+//   int g = gcd(SZ(s),SZ(t));
+//   if(form(s,SZ(t)/g)==form(t,SZ(s)/g)){
+//     cout<<form(s,SZ(t)/g)<<endl;
+//   }else{
+//     cout<<"-1\n";
+//   }
+// }
+
+
+/*function to check if string is periodic or not with dynamic period*/
+// void solve(){
+//   string s;
+//   cin >> s;
+//   int n = s.length();
+//   set<char> c;
+//   bool ok = true;
+//   int k;
+//   for(k=0;k<n;k++){
+//     if(c.find(s[k])==c.end())
+//       c.insert(s[k]);
+//     else
+//       break;
+//   }
+//   for(int i=k;i<n;i++){
+//     if(s[i]!=s[i-k])
+//       ok = false;
+//   }
+//   if(ok)
+//       cout << "YES\n";
+//   else
+//       cout << "NO\n";
+
+// }
+
+/*to cut string in 2 parts*/
+// void check(string s){
+//   for(int i=0;i<SZ(s);i++){
+//     string tmp = s.substr(0,i);
+//     string tmp2 = s.substr(i);
+//     // cout<<tmp<<" "<<tmp2<<endl;
+//   }
+// } 
+ 
+/*base conversation*/
+// void solve(){
+//   int n,bx;
+//   cin>>n>>bx;
+//   vi a1(n);
+//   REP(i,n)cin>>a1[i];
+//   int m,by;
+//   cin>>m>>by;
+//   vi a2(m);
+//   REP(i,m)cin>>a2[i];
+//   int X = 0, Y = 0;
+//   REP(i,n)X = X + a1[i]*pow(bx,n-1-i);
+//   REP(i,m)Y = Y + a2[i]*pow(by,m-1-i);
+//   if(X>Y)cout<<">\n";
+//   else if(X<Y)cout<<"<\n";
+//   else cout<<"=\n";
+//   // cout<<X<<endl;
+// }
+
+/* count of distinct elements in frequency array*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   string s;
+//   cin>>s;
+//   vi was1(26,0),was2(26,0);
+//   for(auto c:s)was1[c-'a']++;
+//   int ans = 0;
+//   for(char c:s){
+//     was1[c-'a']--;
+//     was2[c-'a']++;
+//     int curr = 0;
+//     REP(i,26)curr += min(was1[i],1ll)+min(was2[i],1ll);
+//     ans = max(ans,curr);
+//   }
+//   cout<<ans<<endl;
+// }
+
+/* firstever sliding window*/
+// void solve(){
+//   string s,t;
+//   cin>>s>>t;
+//   if(SZ(s)>SZ(t)){cout<<"NO\n";return;}
+//   mpii was1,was2;
+//   REP(i,SZ(s))was1[s[i]-'a']++;
+//   REP(i,SZ(s))was2[t[i]-'a']++;
+//   if(was1==was2){cout<<"YES\n";return;}
+    
+//   for(int i=1;i+SZ(s)-1<SZ(t);i++){
+//     // for(auto [k,v]:was1)cout<<"(k1,v1) = "<<k<<","<<v<<" ";
+//     // cout<<endl;
+//     // for(auto [k,v]:was2)cout<<"(k2,v2) = "<<k<<","<<v<<" ";
+//     // cout<<endl;
+//     // cout<<endl;
+//     // cout<<endl;
+    
+//     if(was1==was2){cout<<"YES\n";return;}
+//     int init  = t[i-1]-'a';
+//     int final = t[i+SZ(s)-1]-'a';
+//     was2[init]--;
+//     if(was2[init]==0)was2.erase(was2.find(init));
+//     was2[final]++;
+//     if(was1==was2){cout<<"YES\n";return;}
+    
+//   }
+//   cout<<"NO\n";
+// }
+
+/* min distance from one char to another*/
+// int D(char c1, char c2){
+//   string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//   map<char,int> was;
+//   REP(i,SZ(letters))was[letters[i]]=i;
+//   int d1= 0;
+//   int posc1 = was[c1];
+//   while(posc1!=was[c2]){
+//     posc1 = (posc1+1)%26;
+//     d1++;
+//   }
+//   int d2=0;
+//   posc1 = was[c1];
+//   while(posc1!=was[c2]){
+//     posc1 = (posc1-1+26)%26;
+//     d2++;
+//   }
+//   return min(d1,d2);
+// }
+
+/* cool simulation */
+// void solve(){
+//   auto ok = [](string s) {
+//     for (int i = 1; i < (int)s.size(); ++i)
+//       if (s[i - 1] == s[i]) return false;
+//     return true;    
+//   };
+//   int n,m;
+//   string s,t;
+//   cin>>n>>m>>s>>t;
+//   bool f = 0;
+//   REP(x,2){
+//     string cs = s, ct = t;
+//     REP(i,n){
+//       f = f or (ok(cs) and ok(ct));
+//       ct.pb(cs.back());
+//       cs.pop_back();
+//     }
+//     swap(n,m);
+//     swap(s,t);
+//   }
+//   cout<<(f?"YES\n":"NO\n");
+// }
+/*firstever range query problem*/
+// void solve(){
+//   int n,q;
+//   cin>>n>>q;
+//   vi a(n);
+//   int sum = 0;
+  
+//   int oo = 0;
+//   int ee = 0;
+//   int oosum = 0;
+//   int eesum = 0;
+  
+//   REP(i,n){
+//     cin>>a[i];
+//     sum+=a[i];
+//     if(a[i]%2)oo++;
+//     else ee++;
+     
+//   }
+//   while(q--){
+//     int type;
+//     cin>>type;
+//     if(type==0){
+//       int x;
+//       cin>>x;
+//       sum+=(ee*x);
+//       if(x%2==1)oo = ee+oo,ee = 0;
+      
+//     }
+    
+//     else if(type==1){
+//       int x;
+//       cin>>x;
+//       sum+=(oo*x);
+//       if(x%2==1)ee=ee+oo,oo = 0;
+      
+//     }
+//     cout<<sum<<endl;
+//   }
+// }
+
+
+/*next_permutation*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   string t;
+//   cin>>t;
+//   string s = "Timur";
+//   SORT(s);
+//   do{
+//     if(s==t){cout<<"YES\n";return;}
+//   }while(next_permutation(ALL(s)));
+//   cout<<"NO\n";
+// }
+
+/* count in set*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);
+//   REP(i,n)cin>>a[i];
+  
+//   set<int> st;
+//   for(int i=n-1;i>=0;i--){
+//     if(st.count(a[i])){
+//       cout<<i+1<<endl;
+//       return;
+//     }
+//     st.insert(a[i]);
+//   }
+//   cout<<0<<endl;
+// }
+
+/* is valid function for graph and chess problems*/
+// int isvalid(int nx,int ny,int n,int m){
+//   return nx>=0 and ny>=0 and nx<n and ny<m;
+// }
+
+/*prefix and suffix array with 1 based indexing and isvalid function*/
+// int a[200010];
+// void solve(){
+//   int n;
+//   cin>>n;
+//   for(int i=1;i<=n;i++)cin>>a[i];
+//   vi pref(n+1,INT_MIN);
+//   pref[1] = a[1];
+//   for(int i=2;i<=n;i++)pref[i] = max(a[i],pref[i-1]);
+  
+//   vi suff(n+1,INT_MIN);
+//   suff[n] = a[n];
+//   for(int i=n-1;i>=1;i--)suff[i] = max(a[i],suff[i+1]);
+//   for(int i=1;i<=n;i++){
+//     int d2;
+//     if(i-1>=1 and i+1<=n)d2 =max(pref[i-1],suff[i+1]);
+//     else if(i-1>=1)d2 = pref[i-1];
+//     else d2 = suff[i+1];
+//     int diff = a[i]-d2;
+  
+//     cout<<diff<<" ";
+//   }
+//   cout<<endl;
+  
+// }
+/*ends with function*/
+// bool hasEnding (std::string const &fullString, std::string const &ending) {
+//     if (fullString.length() >= ending.length()) {
+//         return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+//     } else {
+//         return false;
+//     }
+// }
+/*extra counter k in 2 pointer*/
+// void solve(){
+//   int n,m,k;
+//   cin>>n>>m>>k;
+//   string a,b;
+//   cin>>a>>b;
+//   sort(a.begin(),a.end());
+//   sort(b.begin(),b.end());
+//   int i=0,j=0,x=0,y=0;
+//   string ans="";
+//   while(i<n && j<m)
+//   {
+//     if((a[i]<b[j] && x<k) || y==k){
+//       ans+=a[i]; 
+//       x++;i++; y=0;
+//     }
+//     else{
+//       ans+=b[j]; 
+//       y++; j++; x=0;
+//     }
+//   }
+//   cout<<ans<<endl;
+// }
+
+/* checking the robot position to reach (0,0) from (i,j)*/
+// void solve(){
+// int n,m;cin>>n>>m;
+// vs v;
+// REP(i,n){string s;cin>>s;v.pb(s);}
+// int xc=INT_MAX,yc=INT_MAX;
+// REP(i,n){
+//   REP(j,m){
+//     if(v[i][j]=='R')
+//       xc = min(xc,i),yc=min(yc,j);
+//   }
+// }
+// if(v[xc][yc]=='R')cout<<"YES\n";
+// else cout<<"NO\n";
+// }
+/* array pop_back, empty, back and front */
+// void solve(){
+  
+//   int n;
+//   cin>>n;
+//   vi a(n),b(n);REP(i,n)cin>>a[i];REP(i,n)cin>>b[i];
+//   vvi v(2);
+//   REP(i,n)v[a[i]].pb(b[i]);
+//   REP(i,2)SORT(v[i]);
+  
+//   int ans = 0;
+//   if(SZ(v[0])==SZ(v[1]))ans-= min(v[0].front(),v[1].front());
+//   while(!v[0].empty() and !v[1].empty()){
+//     ans += (v[0].back() + v[1].back())*2;
+//     v[0].pop_back();
+//     v[1].pop_back();
+    
+//   }
+//   for(auto x:v[0])ans+=x;
+//   for(auto x:v[1])ans+=x;
+//   cout<<ans<<endl;
+// }
+/* frequency in 2d mat*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   map<string,int> was;
+//   string a[3][n];
+//   REP(i,3){
+//     REP(j,n){
+//       cin>>a[i][j];
+//       was[a[i][j]]++;
+//     }
+//   }
+//   REP(i,3){
+//     int tot = 0;
+//     REP(j,n){
+//       if(was[a[i][j]]==1)tot+=3;
+//       else if(was[a[i][j]]==2)tot++;
+//     }
+//     cout<<tot<<" ";
+//   }
+//   cout<<endl;
+  
+// }
+/*prefix sum using 1- based indexing*/
+// int he[1010];
+// void solve(){
+//   int n;
+//   cin>>n;
+//   int flag=0;
+//   for(int i=1;i<=n;i++)
+//   {
+//     int a;
+//   	cin>>a;
+//   	he[i]=he[i-1]+(a==2);
+  	
+//   }
+//   for(int i=1;i<=n;i++)
+//   {
+//   	if(he[i]==he[n]-he[i])
+//   	{
+//   		cout<<i<<endl;
+//   		return;
+  		
+//   	}
+//   }
+//   cout<<"-1"<<endl;
+// }
+
+
+/*firstever number theory problem*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   set<int> st;
+//   for(int i=1;i*i<=n;i++)st.insert(i*i);
+//   for(int i=1;i*i*i<=n;i++)st.insert(i*i*i);
+//   cout<<SZ(st)<<endl;
+// }
+
+/*global array*/
+// int a[200005],b[200005];
+// void solve(){
+//   int n,t;
+//   cin>>n>>t;
+//   int ans = -1;
+//   int x = 0;
+//   REP(i,n)cin>>a[i];
+//   REP(i,n)cin>>b[i];
+//   REP(i,n){
+//     if(i+a[i]<=t and b[i]>x){
+//       x = b[i];
+//       ans = i + 1;
+//     }
+//   }
+  
+//   cout<<ans<<endl;
+// }
+
+/*Tictactoe*/
+// void solve(){
+//   int n = 3;
+//   vs v(n);
+//   REP(i,n)cin>>v[i];
+//   string ans = "DRAW";
+//   REP(i,3)
+//     if(v[i][0]==v[i][1] and v[i][1]==v[i][2] and v[i][0]!='.')
+//       ans = v[i][0];
+//   REP(i,3)
+//     if(v[0][i]==v[1][i] and v[1][i]==v[2][i] and v[0][i]!='.')
+//       ans = v[0][i];
+  
+//   if(v[0][0]==v[1][1] and v[1][1]==v[2][2] and v[0][0]!='.')
+//     ans = v[0][0];
+  
+//   if(v[0][2]==v[1][1] and v[1][1]==v[2][0] and v[0][2]!='.')
+//     ans = v[0][2];
+//   cout<<ans<<endl;
+// }
+
+
+
+/*firstever problem of visited array*/
+// int vis[200010];
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);
+//   REP(i,n){
+//     cin>>a[i];
+//   }
+//   // SORT(a);
+  
+//   memset(vis,0,sizeof(vis));
+//   int ans;
+//   for(int i=0;i<n;i++){
+      
+//     int first = a[i];
+//     int second = (n-2)/first;
+   
+//     if((n-2)%first==0 and vis[second]){
+//       ans = first;
+//     }  
+//     vis[first]++;
+//   }
+//   cout<<(n-2)/ans << " "<<ans<<endl;
+// }
+
+/*min operations to make parity of min and max same*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);
+//   REP(i,n){
+//     int x;
+//     cin>>x;
+//     a[i] = x;
+//   }
+//   SORT(a);
+//   int ans = 0;
+//   if(a[0]%2 == a[n-1]%2){
+//     cout<<0<<endl;return;
+//   }
+//   int l = n,r=n;
+//   for(int i=1;i<n;i++){
+//     if(a[0]%2 != a[i]%2){l=i;break;}
+//   }
+//   for(int i=1;i<n;i++){
+//     if(a[n-1]%2 != a[n-i-1]%2){r=i;break;}
+//   }
+//   ans = min(l,r);
+//   cout<<ans<<endl;
+// }
+
+
+/*insert a letter at each position in string*/
+// void solve(){
+  
+//   int n; string s; cin >> s;
+//   string poss = "abcdefghijklmnopqrstuvwxyz";
+//   int ans = 0;
+  
+//   n =  SZ(s);
+//   string res;
+//   for(char c:poss)
+//   {
+    
+//     for(int i=0;i<n+1;i++){
+      
+//       string tmp = s.substr(0,i)+c+s.substr(i);
+//       int tmpans = get(tmp);
+//       if(tmpans>ans){
+//         ans = tmpans;
+//         res = tmp;
+//       }
+      
+//     }
+    
+//   }
+//   cout<<res<<endl;
+// }
+
+/*use of greater int*/
+// sort(b+1,b+n+1,greater<int>());
+  
+/* applications of regular bracket sequence*/
+// void solve(){
+//   int n,k;
+//   string s;
+//   cin>>n>>k>>s;
+//   int b = count(ALL(s),'B');
+//   int a = 0;
+//   char c='B';
+//   if(b>k)c = 'A';
+//   for(int i=0;b!=k and i<n;i++,a++){
+//     if(b>k and s[i]=='B')b--;
+//     if(b<k and s[i]=='A')b++;
+//   }
+//   if(a==0)cout<<"0\n";
+//   else cout<<"1\n"<<a<<" "<<c<<endl;
+// }
+
+/* function to check if string alternates or not*/
+// bool ok(std::string s) {
+//   for (size_t i = 1; i < s.length(); ++i)
+//     if (s[i] == s[i - 1])
+//       return false;
+//   return true;
+// }
+
+/*rbegin in string*/
+// void solve(){
+// string s,t;
+// int l1,l2;
+// cin>>l1>>l2>>s>>t;
+// if(ok(s)){cout<<"Yes\n";return;}
+// if(!ok(t) or *t.begin()!=*t.rbegin())
+// {cout<<"No\n";return;}
+ 
+// int zz = 0, oo = 0;
+// for(int i=1;i<SZ(s);i++){
+//   if(s[i]==s[i-1]){
+//     if(s[i]=='0')zz=1;
+//     if(s[i]=='1')oo=1;
+//   }
+   
+// }
+// if(zz and t[0]=='0'){cout<<"No\n";return;}
+// if(oo and t[0]=='1'){cout<<"No\n";return;}
+// cout<<"Yes\n";
+// }
+
+/* in a game of tennis,volleyball */
+// winner is last value of string
+
+/* 1849A */
+// void solve(){
+//   int b,c,h;
+//   cin>>b>>c>>h;
+//   // k + 1 = b; or k =  c+ h  so take the min
+//   // k = min(b-1,c+h);
+//   // ans = k + 1 + k;
+//   int till = min(b-1,c+h);
+//   cout<<2*till+1<<endl;
+// }
+/*increase median in least moves*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);REP(i,n)cin>>a[i];
+//   SORT(a);
+//   int idx = (n+1)/2 - 1;
+//   int ans = count(a.begin()+idx,a.end(),a[idx]);
+//   cout<<ans<<endl;
+// }
+/*firstever combinatorics*/
+// void solve(){
+//   string s;
+//   cin>>s;
+//   int k = 10;
+//   int ans = 1;
+//   set<char> st;
+//   REP(i,SZ(s)){
+//     if(i==0 and s[i]=='?') ans *= 9;
+//     else if(i==0 and (s[i]>='A' and s[i]<='J')){
+//       ans *= 9;
+//       st.insert(s[i]);
+//       k--;
+//     }
+//     else if(i>0 and s[i]=='?') ans *= 10;
+//     else if(i>0 and (s[i]>='A' and s[i]<='J')){
+//       if(st.count(s[i]))continue;
+//       else ans *= k;
+//       k--;
+//       st.insert(s[i]);
+//     }
+//   }
+//   cout<<ans<<endl;
+// }
+
+
+/*getting max pairs of lower and upper case letters to match 
+with a tweak till k only*/
+// void solve(){
+//   int n,m;
+//   cin>>n>>m;
+//   int k(m);
+//   string s;
+//   cin>>s;
+//   int N = 26;
+//   vi big(N,0),small(N,0);
+//   for(auto &i:s){
+//     if(i>='A' and i<='Z')big[i-'A']++;
+//     else small[i-'a']++;
+//   }
+//   int ans = 0;
+//   REP(i,N){
+//     int ps = min(small[i],big[i]);
+//     ans+=ps;
+//     small[i] -= ps; big[i] -= ps;
+//     int add = min(k,max(small[i],big[i])/2);
+//     k-=add;
+//     ans+=add;
+//   }
+//   cout<<ans<<endl;
+// }
+
+/*multiset applications*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   multiset<int> was;
+//   FOR(i,1,n+1,1)was.insert(i);
+  
+//   vii ans;
+//   REP(i,n-1){
+//     auto it = was.end();
+//     it--;
+//     int a = *it;
+//     was.erase(it);
+//     it = was.end();
+//     it--;
+//     int b = *it;
+//     was.erase(it);
+//     was.insert((a+b+1)/2);
+//     ans.pb({a,b});
+//   }
+//   cout << *was.begin() << endl;
+//   for(auto ele:ans){
+//     cout<<ele.ff<<" "<<ele.ss<<endl;
+//   }
+// }
+
+
+/* keeping the order same while doing operation in delete map*/
+// void solve(){
+//   string w;int p;
+//   cin>>w>>p;
+//   string s(w);
+//   int cost = 0;
+//   sort(w.rbegin(),w.rend());
+//   REP(i,SZ(w))
+//     cost += (w[i]-'a'+1);
+//   map<char,int> del;
+//   REP(i,SZ(w)){
+//     if(cost>p){
+//       del[w[i]]++;
+//       cost -= (w[i]-'a'+1);
+//     }
+//   }
+//   REP(i,SZ(w)){
+//     if(del[s[i]]>0){
+//       del[s[i]]--;
+//       continue;
+//     }
+//     cout<<s[i];
+//   }
+//   cout<<endl;
+// }
+
+/*Lexicographically smallest palindromic string half made from s[1:k]*/
+// void solve(){
+//   int n;string s;
+//   cin>>n>>s;
+//   int k=1;
+//   while(k<n and (s[k-1]>s[k] or (k>1 and s[k]==s[k-1])))
+//     k++;
+//   REP(i,k)cout<<s[i];
+//   RFOR(i,k-1,0,1)cout<<s[i];
+//   cout<<endl;
+// }
+
+/*No of operations a=(a/b) or b=b+1 to make a=0*/
+// void solve(){
+//   int a,b;
+//   cin>>a>>b;
+//   int ans = INT_MAX;
+//   REP(i,100){
+//     if(b>1){
+//       int curr = i;
+//       int tmpa = a;
+//       while(tmpa>0){
+//         tmpa/=b;
+//         curr++;
+//       }
+//       ans = min(ans,curr);
+//     }
+//     b++;
+//   }
+//   cout<<ans<<endl;
+// }
+
+/*change between old and new*/
+// void solve(){
+// int n;string s;
+// cin>>n>>s;
+// int sum = 0;
+// vi v;
+// REP(i,n){
+//   if(s[i]=='L'){
+//     int change = (n-1-i)-i;
+//     v.pb(change);
+//     sum+=i;
+//   }else{
+     
+//     int change = i-(n-1-i);
+//     v.pb(change);
+//     sum+=n-1-i;
+//   }
+// }
+// sort(v.rbegin(),v.rend());
+// REP(i,n){
+//   if(v[i]>0)sum+=v[i];
+//   cout<<sum<<" ";
+// }
+// cout<<endl;
+// }
+
+/*first occurrence and last occurrence in a array*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);
+//   REP(i,n)cin>>a[i];
+//   vi b(n);
+//   REP(i,n)cin>>b[i];
+//   int l=-1,r=-1;
+//   REP(i,n){
+//     if(a[i]!=b[i]){
+//       r = i;
+//       if(l==-1)l=i;
+//     }
+//   }
+//   while(l>0 and b[l]>=b[l-1])l--;
+//   while(r<n-1 and b[r+1]>=b[r])r++;
+//   cout<<l+1<<" "<<r+1<<endl;
+  
+// }
+
+/* first occurrence and last occurrence in a map*/
+// void solve(){
+//   int n, k;
+//   cin >> n >> k;
+//   map<int, pair<int, int>>m;
+//   REP(i, n){
+//     int u;
+//     cin >> u;
+//     if(!m.count(u)) {
+//         m[u].first = i;
+//         m[u].second = i;
+//     }
+//     else m[u].second = i;
+//   }
+//   REP(i, k){
+//     int a, b;
+//     cin >> a >> b;
+//     if(!m.count(a) or !m.count(b) or m[a].first > m[b].second) {
+//         cout << "NO\n"; //equals = 0 = wrong
+//     }
+//     else cout << "YES\n";
+//   }
+// }
+
+/* min operations to sorted array by applying a[i]=0 for a[i]==x where x can be anything in array*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);
+//   map<int,vi> was;
+//   REP(i,n){
+//     cin>>a[i];
+//     was[a[i]].pb(i);
+//   }
+//   int ans = 0;
+//   set<int> st;
+//   REP(i,n-1)if(a[i]>a[i+1])st.insert(i);
+  
+//   while(!st.empty()){
+//     int i = *st.begin();
+//     int x;
+//     if(a[i]>0)x=a[i];
+//     else x = a[i+1];
+//     for(int j:was[x]){
+//       a[j] = 0;
+//       st.erase(j-1);
+//       st.erase(j);
+//       if(j-1>=0 and a[j-1]>a[j])st.insert(j-1);
+//       if(j+1<n and a[j]>a[j+1])st.insert(j);
+//     }
+//     ans++;
+//     // REP(i,n)cout<<a[i]<<" ";
+//     // cout<<endl;
+//   }
+//   cout<<ans<<endl;
+  
+// }
+
+/* beautiful two pointer and find first occurrence of a char in string*/
+// void solve(){
+//   int n,k;
+//   cin>>n>>k;
+//   string s;cin>>s;
+//   int res = 1;
+//   int i = s.find_first_of('*');
+//   while(1){
+//     int j =min(n-1,i+k);
+//     // longest j such that s[j]=='*'
+//     for(;i<j and s[j]=='.';j--){}
+//     if(i==j)break;
+//     res++;
+//     i=j;
+//   }
+//   cout<<res<<endl;
+// }
+
+/* reset and keep size/total in array*/
+// int n,x,ans,temp,sum;
+// int a[105];
+// void solve(){
+
+// 	cin>>n;
+// 	for(int i=1;i<=n;++i)
+// 	{
+// 		cin>>x;
+// 		ans++;
+// 		if(x<0) sum++;
+// 		if(sum==3)
+// 		{
+// 			a[++temp]=ans-1;
+// 			ans=1;
+// 			sum=1;
+// 		}
+// 	}
+// 	a[++temp]=ans;
+// 	cout<<temp<<endl;
+// 	for(int i=1;i<=temp;++i)
+// 	{
+// 		cout<<a[i]<<" ";
+// 	}
+// 	return;
+// }
 
 /* firstever dp problem*/
 // const int maxn = 210;

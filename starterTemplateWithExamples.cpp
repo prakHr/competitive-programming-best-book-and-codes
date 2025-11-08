@@ -25,16 +25,13 @@ typedef map<int,int> mpii;
 typedef set<int> seti;
 
 
-
 void solve(){
-  
+ 
 }
-
-
 signed main() 
 {
   int t=1;
-  // cin>>t;
+  cin>>t;
   
   while(t--){
     solve();
@@ -42,6 +39,12 @@ signed main()
   return 0;
   
 }
+
+
+/* Currently doing */
+
+// https://codeforces.com/problemset?tags=implementation,800-800&list=dcf436fa799e76d1ee315039d3abc0bc
+// https://codeforces.com/problemset?tags=implementation,900-900&list=dcf436fa799e76d1ee315039d3abc0bc
 
 /*
 
@@ -77,7 +80,478 @@ Start using personal laptop with different browsers while using different codefo
 /* TIPS */
 // 1. while clearing a global map,set,vector need to clear it using .clear() or memset
 // 2. consider 1-based indexing wherever deemed necessary
+// 3. break condition should always come at the start of the loop
+// 4. convert smaller and greater than into 1 single case
+// 5. for anti diagonal elements in a matrix use a[i][n-1-i]
+// 6. Add extra char after string for considering corner cases and also handling i+1 th state
+// 7. one of the reasons for wrong output is same variable reused 
+// 8. to use the col/row instead of row/col use REP(j,m)REP(i,n)
+// 9. use LLONG_MAX instead of INT_MAX
 
+
+// function to find cycle length starting from a start position
+// void solve(){
+//   int n,x,k;
+//   cin>>n>>x>>k;
+//   string s;
+//   cin>>s;
+//   int bal = x;
+//   REP(i,n){
+//     bal -= (s[i]=='L');
+//     bal += (s[i]=='R');
+//     k--;
+//     if(bal==0)break;
+//   }
+//   int ans = 0;
+//   if(bal==0){
+//     ans = 1;
+//     REP(i,n){
+//       bal -= (s[i]=='L');
+//       bal += (s[i]=='R');
+//       if(bal==0){
+//         ans+=k/(i+1);
+//         break;
+//       }
+//     }
+//   }
+//   cout<<ans<<endl;
+// }
+
+
+/* binary search on periodic array*/
+// void solve(){
+//   int n,k,x;
+//   cin>>n>>k>>x;
+//   vi a(n);REP(i,n)cin>>a[i];
+//   if(accumulate(ALL(a),0ll)*k<x){cout<<"0\n";return;}
+  
+//   int l = 1, r = n*k;
+//   while(l<=r){
+//     int m = (l+r)/2;
+//     int cnt = (n*k - m + 1)/n;
+//     int rem = (n*k - m + 1)%n;
+//     int sum = cnt*accumulate(ALL(a),0ll);
+//     for(int i=n-rem;i<n;i++)sum+=a[i];
+//     if(sum<x)r = m - 1;
+//     else l = m + 1;
+//   }
+//   cout<<r<<endl;
+// }
+
+/* brute force and find from starting point s*/
+// void solve(){
+//   int n,s,k;
+//   cin>>n>>s>>k;
+//   mpii was;
+//   vi a(k);REP(i,k)cin>>a[i];
+  
+//   REP(x,k){
+//     if(s-x>=1 and find(ALL(a),s-x)==a.end()){
+//       cout<<x<<endl;
+//       return;
+//     }
+//     if(s+x<=n and find(ALL(a),s+x)==a.end()){
+//       cout<<x<<endl;
+//       return;
+//     }
+//   }
+  
+// }
+
+/* how to get an integer by setting atleast 1 bit and atmost 2 bits*/
+// void solve(){
+//   int x;
+//   cin>>x;
+//   int ans = -1;
+//   REP(i,30){
+//     REP(j,30){
+//       int y = (1<<i) | (1<<j);
+//       if(y<x and x+y> (x^y) and y+(x^y)>x)
+//         ans = y;
+//     }
+//   }
+//   cout<<ans<<endl;
+// }
+
+/* Two pointer again */
+// void solve(){
+//   int n;
+//   cin>>n;
+//   vi a(n);
+//   seti st;
+//   REP(i,n){cin>>a[i];st.insert(a[i]);}
+//   if(SZ(st)==1){cout<<"0\n";return;}
+//   int cost = LLONG_MAX;
+//   int i=0;
+//   while(i<n){
+//     int j = i;
+//     while(j<n and a[j]==a[i])j++;
+//     cost  = min(cost,(i+1+n-j-1)*a[i]);
+//     i=j;
+//   }
+//   cout<<cost<<endl;
+  
+// }
+
+/*rock paper scissor game*/
+// bool wins(string a, string b) {
+//     return (a == "rock" && b == "scissors") ||
+//           (a == "scissors" && b == "paper") ||
+//           (a == "paper" && b == "rock");
+// }
+// void solve(){
+//   string f, m, s;
+//   cin >> f >> m >> s;
+
+//   bool fWins = wins(f, m) && wins(f, s);
+//   bool mWins = wins(m, f) && wins(m, s);
+//   bool sWins = wins(s, f) && wins(s, m);
+
+//   if (fWins)
+//       cout << "F";
+//   else if (mWins)
+//       cout << "M";
+//   else if (sWins)
+//       cout << "S";
+//   else
+//       cout << "?";
+// }
+
+
+/*maximum length of non-decreasing segments of a array*/
+// void solve(){
+//   int n;
+//   cin >> n;
+//   vi a(n);
+//   for (int i = 0; i < n; i++) cin >> a[i];
+
+//   int max_len = 1, current_len = 1;
+
+//   for (int i = 1; i < n; i++) {
+//       if (a[i] >= a[i - 1])
+//           current_len++;
+//       else
+//           current_len = 1;
+
+//       max_len = max(max_len, current_len);
+//   }
+
+//   cout << max_len << endl;
+// }
+
+
+/*how to check if all values upto some limit are same or not in a string*/
+// void solve(){
+//   string x;
+//   cin>>x;
+//   int sum = 0,ans = 0;
+//   REP(i,SZ(x)){
+//     if(x[i]==x[i-1] and sum<5)sum++;
+//     else{
+//       ans++;
+//       sum = 1;
+//     }
+//   }
+//   cout<<ans<<endl;
+// }
+
+/*firstever challenging visited array problem*/
+// const int N = 1005;
+// int a[N];
+// int vis[N];
+ 
+// void solve(){
+//   int n,k;
+//   cin>>n>>k;
+//   REP(i,k){int x;cin>>x;
+//     a[i]=x;
+//     vis[x] = 1;
+//   }
+//   int t = 0;
+//   for(int i=0;i<k;i++){
+//     cout<<a[i];
+//     for(int j=1;j<n;j++){
+//       while(vis[++t]);
+//       cout<<" "<<t;
+//     }
+//     cout<<endl;
+//   }
+  
+// }
+ 
+/*firstever clock/time problem in cpp*/
+// void solve(){
+  
+//   int n;
+//   cin>>n;
+//   int timer,h,m;
+//   cin>>h>>m;
+//   timer = 60*h + m;
+//   int ans = 24*60;
+//   REP(i,n){
+//     cin>>h>>m;
+//     int t = 60*h + m - timer;
+//     if(t<0)t+=24*60;
+//     ans = min(ans,t);
+    
+//   }
+//   cout<<ans/60 << " "<<ans%60<<endl;
+  
+// }
+/* to find if last element is even or odd at even or odd position*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   string s;
+//   cin>>s;
+//   bool odd = 0,even = 0;
+//   for(int i=1;i<=n;i++){
+//     if(i%2==1)odd |= ((s[i-1]-'0')%2 == 1);
+//     else even |= ((s[i-1]-'0')%2 == 0);
+//   }
+//   if(n%2==1){
+//     cout << (odd?1:2)<<endl;
+//   }else{
+//     cout << (even?2:1)<<endl;
+//   }
+// }
+// function to take a copy in a string
+// void solve(){ 
+//   int n,k;string s;
+//   cin>>n>>k>>s;
+//   string r(s.rbegin(),s.rend());
+//   int gl = r>s;
+//   SORT(s);
+//   if(gl or (k>=1 and s[0]!=s[n-1]))
+//     cout<<"YES\n";
+//   else cout<<"NO\n";
+
+// }
+
+//minimize total inversions
+// void solve(){
+//   int n;
+//   cin>>n;
+//   pii arr[n];
+//   REP(i,n)cin>>arr[i].ff;
+//   REP(i,n)cin>>arr[i].ss;
+//   sort(arr,arr+n);
+//   REP(i,n)cout<<arr[i].ff<<" ";
+//   cout<<endl;
+//   REP(i,n)cout<<arr[i].ss<<" ";
+//   cout<<endl;
+// }
+
+/*function to find knight attacks king and queen both*/
+// void solve(){
+  
+//   int dx[4] = {-1, 1, -1, 1}, dy[4] = {-1, -1, 1, 1};
+//   int a, b; cin >> a >> b;
+//   int x1, y1, x2, y2; cin >> x1 >> y1 >> x2 >> y2;
+//   set<pair<int, int>> st1, st2;
+//   for(int j = 0; j < 4; j++){
+//       st1.insert({x1+dx[j]*a, y1+dy[j]*b});
+//       st2.insert({x2+dx[j]*a, y2+dy[j]*b});
+//       st1.insert({x1+dx[j]*b, y1+dy[j]*a});
+//       st2.insert({x2+dx[j]*b, y2+dy[j]*a});
+//   }
+//   int ans = 0;
+//   for(auto x : st1)
+//       if(st2.find(x) != st2.end())
+//           ans++;
+//   cout << ans << '\n';
+// }
+
+// min operations to make product = 1
+// void solve(){
+//   int n;
+//   cin>>n;
+//   int ans = 0;
+//   int zz = 0;
+//   int minus = 0;
+//   FOR(i,1,n+1,1){
+//     int x;
+//     cin>>x;
+//     if(x<0){ans+=-1-x;minus++;}
+//     else if(x==0)zz++;
+//     else if(x>0)ans+=x-1;
+//   }
+//   if(minus%2==1 and zz==0){
+//     ans+=2;
+//   }else ans+=zz;
+//   cout<<ans<<endl;
+// }
+
+// 2d frequency array
+// int h[2000][5];
+// void solve(){
+//   int n,m;
+//   cin>>n>>m;
+//   char c;int a;
+//   int rv = 0;
+//   REP(i,n)REP(j,m)cin>>c,h[j][c-'A']++;
+//   REP(i,m)cin>>a,rv+= a**max_element(h[i],h[i]+5);
+//   cout<<rv<<endl;
+// }
+
+
+// smallest power of 2 less than n
+// void solve(){
+//   int n;
+//   cin>>n;
+//   int p = 1;
+//   while(p*2<=n)p<<=1;
+//   cout<<p<<endl;
+// }
+
+// taking damage using ceil division
+// const int maxn = 100010;
+// int A,B,n;
+// int a[maxn],b[maxn];
+// void solve(){
+//   cin>>A>>B>>n;
+//   REP(i,n)cin>>a[i+1];
+//   REP(i,n)cin>>b[i+1];
+//   int damage = 0;//total damage
+//   REP(i,n)
+//     damage += (b[i+1]+A-1)/A * a[i+1];
+//   REP(i,n){
+//     if(B - (damage-a[i+1])>0)
+//       {cout<<"YES\n";return;}
+//   }
+//   cout<<"NO\n";
+// }
+
+
+// firstever problem using minmax
+// void solve(){
+//   int n,k;
+//   cin>>n>>k;
+//   vi a(n);
+//   REP(i,n)cin>>a[i];
+//   SORT(a);
+//   int cnt = 1,ans = 1;
+//   for(int i=1;i<n;i++){
+//     if(a[i]-a[i-1]>k)cnt=1;
+//     else cnt++;
+    
+//     ans = max(ans,cnt);
+//   }
+//   cout<<n-ans<<endl;
+// }
+
+
+/*function to get list of divisors*/
+// vi getDiv(int n){
+//   vi rv;
+//   for(int i=1;i*i<=n;i++){
+//     if(n%i==0){
+//       if(i==n/i)rv.pb(i);
+//       else rv.pb(i),rv.pb(n/i);
+//     }
+//   }
+//   SORT(rv);
+//   return rv;
+// }
+// modify one number to form an AP
+// void solve(){
+//   int a,b,c;
+//   cin>>a>>b>>c;
+//   int new_a = b - (c-b);
+//   if(new_a>=a and new_a%a==0 and new_a!=0){
+//     cout<<"YES\n";return;
+//   }
+//   int new_b = a + (c-a)/2;
+//   if(new_b>=b and (c-a)%2==0 and new_b%b==0 and new_b!=0){
+//     cout<<"YES\n";return;
+//   }
+//   int new_c = a + 2*(b-a);
+//   if(new_c>=c and new_c%c==0 and new_c!=0){
+//     cout<<"YES\n";return;
+//   }
+//   cout<<"NO\n";
+//   return;
+// }
+
+/* function that checks first non visited in AP*/
+// void solve(){
+//   int n;
+//   cin>>n;
+//   int ans = 0;
+//   REP(i,n){
+//     int u,v;
+//     cin>>u>>v;
+//     while(u<=ans)u+=v;
+//     ans = u;
+//   }
+//   cout<<ans<<endl;
+// }
+
+
+/* function that contains only one non-zero number in a digit*/
+// int check(int n){
+  
+//   mpii was1,was2;
+  
+//   while(n>0){
+//     if(n%10!=0){
+      
+//       was1[n%10]++;
+//       if(was1[n%10]>1)return 0;
+//     }
+  
+//     n/=10;
+    
+//   }
+//   if(SZ(was1)>1)return 0;
+//   return 1;
+  
+  
+// }
+/* function to get min and max digits in a integer*/
+// int get(int n){
+//   int mx=INT_MIN,mn=INT_MAX;
+//   while(n>0){
+//     mx = max(mx,n%10);
+//     mn = min(mn,n%10);
+//     n/=10;
+//   }
+//   return mx-mn;
+// }
+/*hare and tortise algo*/
+// void solve(){
+//   int l,r,a;
+//   cin>>l>>r>>a;
+//   int ans = 0;
+//   while(a--){
+//     if(l>r)r++;
+//     else l++;
+//   }
+//   while(l and r){
+//     ans++;ans++;
+//     l--;
+//     r--;
+//   }
+//   cout<<ans<<endl;
+// }
+
+/* function to calculate factorial */
+// int fact(int n){
+//   int rv = 1;
+//   for(int i=1;i<=n;i++)
+//     rv *= i;
+//   return rv;
+// }
+
+/*check if ith bit is set in n or not */
+// void solve(){
+//   int n;
+//   cin>>n;
+//   for(int i=21;i>=0;i--){
+//       if((n>>i) & 1)cout<<i+1<<" ";
+//   }
+ 
+// }
 /*function to convert chess string into chess board coordinate*/
 // pair<int, int> chessToCoords(const string& square) {
 //     if (square.length() != 2) {
